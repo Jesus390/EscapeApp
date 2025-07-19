@@ -10,10 +10,22 @@ class Mapa():
         self.EDIFICIO = 1
         self.OBSTACULO = 2
 
+        self.ENTRADA = 3
+        self.SALIDA = 4
+
+
+
         self.simbolos = {
-            0: '.',
-            1: 'E',
-            2: 'X'
+            0: '⬜',
+            1: '⛪',
+            2: '🚧',
+            3: '🚶', 
+            4: '⛳', 
+            5: "🟡",         
+            6: "🟢",         
+            7: "🟣",         
+            8: "🔵",
+            9: '👿'          
         }
 
     def es_valido(self, x, y):
@@ -97,3 +109,26 @@ class Mapa():
             if self.grilla[x][y] == 0:
                 self.grilla[x][y] = self.OBSTACULO
                 colocados += 1
+
+    def es_ubicacion_libre(self,x,y):
+        return self.es_valido(x, y) and self.grilla[x][y] == 0
+    
+    def colocar_entrada_salida(self,entrada,salida):
+        ex,ey=entrada
+        sx,sy=salida
+
+        if not self.es_ubicacion_libre(ex, ey):
+            raise ValueError(f"Ubicación de entrada inválida: {entrada}")
+
+        if not self.es_ubicacion_libre(sx, sy):
+            raise ValueError(f"Ubicación de salida inválida: {salida}")
+
+        self.grilla[ex][ey] = self.ENTRADA
+        self.grilla[sx][sy] = self.SALIDA
+
+    def buscar_ubicacion_libre(self):
+        while True:
+            x = random.randint(0, self.alto - 1)
+            y = random.randint(0, self.ancho - 1)
+            if self.es_ubicacion_libre(x, y):
+                return (x, y)
