@@ -15,16 +15,24 @@ class Heroe(Entidad):
     def movimiento(self, direccion):
         if direccion == "w":
             if self.mapa.es_valido(self.pos_x, self.pos_y - 1):
-                self.pos_y -= 1
+                self.pos_x_anterior = self.pos_x
+                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = "."
+                self.pos_x -= 1
         elif direccion == "s":
             if self.mapa.es_valido(self.pos_x, self.pos_y + 1):
-                self.pos_y += 1
-        elif direccion == "a":
-            if self.mapa.es_valido(self.pos_x, self.pos_y - 1):
-                self.pos_x -= 1
-        elif direccion == "d":
-            if self.mapa.es_valido(self.pos_x, self.pos_y + 1):
+                self.pos_x_anterior = self.pos_x
+                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = "."
                 self.pos_x += 1
+        elif direccion == "a":
+            if self.mapa.es_valido(self.pos_x, self.pos_y):
+                self.pos_y_anterior = self.pos_y
+                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = "."
+                self.pos_y -= 1
+        elif direccion == "d":
+            if self.mapa.es_valido(self.pos_x, self.pos_y):
+                self.pos_y_anterior = self.pos_y
+                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = "."
+                self.pos_y += 1
 
     def agregar_al_mapa(self):
         if self.mapa.es_valido(self.pos_x, self.pos_y):
