@@ -1,17 +1,24 @@
-from personajes import Personajes
+from personajes import Heroe
 from Mapa import Mapa
-from premiotrampa import Trampa, Premio
+from premiotrampa import Premio
 
-class jugar():
+class Jugar():
 
-    def __init__(self):
-        self.tablero = Mapa()
-        self.personaje = Personajes()
-        self.trampas = Trampa()
-        self.premios = Premio()
+    def __init__(self, alto, ancho, pos_inicial):
+        self.tablero = Mapa(alto, ancho, pos_inicial)
+        self.personaje = Heroe(self.tablero)
 
     def jugar(self):
         turno = 0
-        while turno <= 50:
+        self.tablero.generar_cuadras()
+        while turno <= 10:
+            self.tablero.mostrar_tablero()
+
+            direccion = input('Ingrese una direccion (w,a,s,d)')
+            self.personaje.movimiento(direccion)
             
             turno += 1
+
+pos_inicial = (0,0)
+jugar = Jugar(40,40, pos_inicial)
+jugar.jugar()
