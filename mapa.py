@@ -127,8 +127,9 @@ class Mapa():
         self.grilla[sx][sy] = self.SALIDA
 
     def buscar_ubicacion_libre(self):
-        while True:
-            x = random.randint(0, self.alto - 1)
-            y = random.randint(0, self.ancho - 1)
-            if self.es_ubicacion_libre(x, y):
-                return (x, y)
+        libres = [(fila, col) for fila in range(self.alto) for col in range(self.ancho) if self.es_ubicacion_libre(fila, col)]
+
+        if not libres:
+            raise Exception("No hay ubicaciones libres en el mapa.")
+        
+        return random.choice(libres)
