@@ -5,7 +5,7 @@ class Mapa():
         self.edificio=edificio
         self.obstaculo=obstaculo
         self.pos=pos
-        self.grilla = [['0' for _ in range(ancho)] for _ in range(alto)]
+        self.grilla = [[0 for _ in range(ancho)] for _ in range(alto)]
 
     def es_valido(self):
         x,y=self.pos
