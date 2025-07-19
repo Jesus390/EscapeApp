@@ -28,7 +28,7 @@ class Heroe(Entidad):
 
     def agregar_al_mapa(self):
         if self.mapa.es_valido(self.pos_x, self.pos_y):
-            self.mapa[self.pos_x][self.pos_y] = 3
+            self.mapa.grilla[self.pos_x][self.pos_y] = 3
 
 
 class Villanos(Entidad):

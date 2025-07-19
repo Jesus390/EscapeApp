@@ -3,10 +3,10 @@ import random
 #clase para los tipos de poderes(speed,saltar muros,teleport,escudo Antivillano(Exclusivo para el personaje))
 class Premio(Entidad):
   
-    def __init__(self, x, y, tipo, mapa, exclusivo_jugador=False):
+    def __init__(self, pos, tipo, mapa, exclusivo_jugador=False):
 
         self.mapa = mapa
-        super().__init__(x, y)
+        super().__init__(pos)
 
         self.tipo = tipo
 
@@ -55,7 +55,7 @@ class PosicionarPoderes:
             x = random.randint(0, columnas - 1)
             y = random.randint(0, filas - 1)
             #creo el objeto con tu tipo y posicion
-            premio = Premio(x, y, tipo)
+            premio = Premio((x, y), tipo, self.mapa, True)
             self.mapa[y][x] = premio.get_valor() #posiciono el poder en el mapa
             self.premios.append(premio) #guardo para usar despues
 

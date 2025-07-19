@@ -20,7 +20,11 @@ class Mapa():
             1: 'E',
             2: 'X',
             3: 'S', 
-            4: 'D' 
+            4: 'D', 
+            5: "S",         # speed
+            6: "J",         # salto
+            7: "T",         # teleport
+            8: "A"          # escudo (antivillano)
         }
 
     def es_valido(self, x, y):
