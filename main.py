@@ -1,4 +1,4 @@
-from personajes import Heroe
+from personajes import Heroe, Villanos
 from mapa import Mapa
 from premiotrampa import PosicionarPoderes
 
@@ -7,6 +7,7 @@ class Jugar():
     def __init__(self, alto, ancho, pos_inicial):
         self.tablero = Mapa(alto, ancho, pos_inicial)
         self.heroe = Heroe(self.tablero, pos_inicial)
+        self.villano = Villanos(self.tablero, (27, 47))
 
     def jugar(self):
         turno = 0
@@ -17,7 +18,7 @@ class Jugar():
         posicionador = PosicionarPoderes(self.tablero.grilla)
         posicionador.generar_poder(5)
 
-        while turno <= 10:
+        while turno <= 50:
             self.tablero.mostrar_tablero()
 
             direccion = input('Ingrese una direccion (w,a,s,d)')
