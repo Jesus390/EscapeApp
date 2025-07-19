@@ -2,8 +2,10 @@ from entidad import Entidad
 
 
 class Heroe(Entidad):
-    def __init__(self, mapa):
+    def __init__(self, mapa, x, y):
         self.mapa = mapa
+        self.x = x
+        self.y = y
 
     def movimiento(self, direccion):
         if direccion == "w":
