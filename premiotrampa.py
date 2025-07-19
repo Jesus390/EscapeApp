@@ -39,40 +39,20 @@ class Premio(Entidad):
                 quien_usa.poderes["escudo"] = True
 
 #clase para posicionar los premios/poderes en el mapa 
+
+
 class PosicionarPoderes:
-    def __init__(self,mapa):
-        self.mapa = mapa
-        self.premios = []
-
-    def generar_poder(self,cantidad):
-        tipos = ["speed", "saltar", "teleport", "escudo"]
-        filas = len(self.mapa)
-        columnas = len(self.mapa[0])
-
-       
-        for _ in range(cantidad):
-            tipo = random.choice(tipos)
-
-            
-    
-
-class GeneradorDePremios:
     def __init__(self, mapa):
-        # guardo el mapa para modificarlo cuando pongo premios
         self.mapa = mapa
-        # lista donde guardo los premios que genero
         self.premios = []
 
-    def posicion_libre(self, x, y):
-        # si en la posicion hay edificio o obstaculo o premio ya puesto, no esta libre
-        # edificio = 1, obstaculo = 2, premios = 5,6,7,8 segun los valores que definiste
-        valor = self.mapa[y][x]
-        if valor == 0:
+    def posicion_valida(self, x, y):
+        if self.mapa[y][x] == 0:
             return True
         else:
             return False
 
-    def generar_premios(self, cantidad):
+    def generar_poder(self, cantidad):
         tipos = ["speed", "saltar", "teleport", "escudo"]
         filas = len(self.mapa)
         columnas = len(self.mapa[0])
@@ -84,13 +64,15 @@ class GeneradorDePremios:
                 x = random.randint(0, columnas - 1)
                 y = random.randint(0, filas - 1)
 
-                if self.posicion_libre(x, y):
+                if self.posicion_valida(x, y):
                     break
 
-            premio = Premio(x, y, tipo)
-            self.mapa[y][x] = premio.get_valor()
-            self.premios.append(premio)
+            poder = Premio(x, y, tipo)
+            self.mapa[y][x] = poder.get_valor()
+            self.premios.append(poder)
 
+            
+            
 
 
 
