@@ -25,8 +25,6 @@ class Jugar():
 
             direccion = input('Ingrese una direccion (w,a,s,d)')
             self.heroe.movimiento(direccion)
-            self.heroe.agregar_al_mapa()
-
             self.villano.movimiento_AI((self.heroe.pos_x, self.heroe.pos_y), turno)
             
             turno += 1

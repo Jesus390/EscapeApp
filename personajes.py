@@ -13,29 +13,31 @@ class Heroe(Entidad):
         }
 
     def movimiento(self, direccion):
+        nueva_x, nueva_y = self.pos_x, self.pos_y
+
         if direccion == "w":
-            if self.mapa.es_valido(self.pos_x, self.pos_y - 1):
-                self.pos_x_anterior = self.pos_x
-                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = 0
-                self.pos_x -= 1
+            nueva_y -= 1
         elif direccion == "s":
-            if self.mapa.es_valido(self.pos_x, self.pos_y + 1):
-                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = 0
-                self.pos_x += 1
+            nueva_y += 1
         elif direccion == "a":
-            if self.mapa.es_valido(self.pos_x, self.pos_y):
-                self.pos_y_anterior = self.pos_y
-                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = 0
-                self.pos_y -= 1
+            nueva_x -= 1
         elif direccion == "d":
-            if self.mapa.es_valido(self.pos_x, self.pos_y):
-                self.pos_y_anterior = self.pos_y
-                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = 0
-                self.pos_y += 1
+            nueva_x += 1
+        else:
+            return  
+
+        if self.mapa.es_valido(nueva_x, nueva_y) and self.mapa.grilla[nueva_y][nueva_x] != 1:
+            self.mapa.grilla[self.pos_y][self.pos_x] = 0  
+            self.pos_x, self.pos_y = nueva_x, nueva_y
+            self.mapa.grilla[self.pos_y][self.pos_x] = 3 
 
     def agregar_al_mapa(self):
         if self.mapa.es_valido(self.pos_x, self.pos_y):
-            self.mapa.grilla[self.pos_x][self.pos_y] = 3
+            self.mapa.grilla[self.pos_y][self.pos_x] = 3
+
+    def _validar_obstaculo(self):
+        return self.mapa.grilla[self.pos_y][self.pos_x] == 1
+
 
 
 class Villanos(Entidad):
@@ -64,9 +66,19 @@ class Villanos(Entidad):
     def movimiento_AI(self, player_pos, max_turno):
         mejor_mov = self.get_best_move(player_pos, max_turno)
         if mejor_mov:
-            self.mapa.grilla[self.pos_x][self.pos_y] = 0
-            self.pos_x, self.pos_y = mejor_mov
-            self.mapa.grilla[self.pos_x][self.pos_y] = 9
+
+            self.mapa.grilla[self.pos_y][self.pos_x] = 0
+
+
+            nueva_x, nueva_y = mejor_mov
+            valor_en_celda = self.mapa.grilla[nueva_y][nueva_x]
+
+            if valor_en_celda == 3:
+                print("¡El villano atrapó al héroe!")
+
+            self.pos_x, self.pos_y = nueva_x, nueva_y
+            self.mapa.grilla[self.pos_y][self.pos_x] = 9
+
             self.ultimos_movimientos.append(mejor_mov)
             if len(self.ultimos_movimientos) > 4:
                 self.ultimos_movimientos.pop(0)
