@@ -16,11 +16,15 @@ class Mapa():
 
 
         self.simbolos = {
-            0: '.',
-            1: 'E',
-            2: 'X',
-            3: 'S', 
-            4: 'D' 
+            0: '⬜',
+            1: '⛪',
+            2: '🚧',
+            3: '🚶', 
+            4: '⛳', 
+            5: "🟡",         
+            6: "🟢",         
+            7: "🟣",         
+            8: "🔵"          
         }
 
     def es_valido(self, x, y):
@@ -120,3 +124,10 @@ class Mapa():
 
         self.grilla[ex][ey] = self.ENTRADA
         self.grilla[sx][sy] = self.SALIDA
+
+    def buscar_ubicacion_libre(self):
+        while True:
+            x = random.randint(0, self.alto - 1)
+            y = random.randint(0, self.ancho - 1)
+            if self.es_ubicacion_libre(x, y):
+                return (x, y)
