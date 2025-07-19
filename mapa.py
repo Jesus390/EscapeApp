@@ -124,3 +124,10 @@ class Mapa():
 
         self.grilla[ex][ey] = self.ENTRADA
         self.grilla[sx][sy] = self.SALIDA
+
+    def buscar_ubicacion_libre(self):
+        while True:
+            x = random.randint(0, self.alto - 1)
+            y = random.randint(0, self.ancho - 1)
+            if self.es_ubicacion_libre(x, y):
+                return (x, y)
