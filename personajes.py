@@ -20,5 +20,5 @@ class Villanos(Entidad):
     def __init__(self, mapa):
         self.mapa = mapa
 
-    def movimiento(self, direccion):
+    def movimiento(self):
         movimientos = [(1, 0), (-1, 0), (0, 1), (0, -1)]
