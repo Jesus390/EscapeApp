@@ -14,28 +14,44 @@ class Heroe(Entidad):
 
     def movimiento(self, direccion):
         if direccion == "w":
-            if self.mapa.es_valido(self.pos_x, self.pos_y - 1):
-                self.pos_x_anterior = self.pos_x
-                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = 0
+            if (
+                self.mapa.es_valido(self.pos_x, self.pos_y - 1)
+                and not self._validar_obstaculo()
+            ):
+                self.mapa.grilla[self.pos_x][self.pos_y] = 0
                 self.pos_x -= 1
+                self.mapa.grilla[self.pos_x][self.pos_y] = 3
         elif direccion == "s":
-            if self.mapa.es_valido(self.pos_x, self.pos_y + 1):
-                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = 0
+            if (
+                self.mapa.es_valido(self.pos_x, self.pos_y + 1)
+                and not self._validar_obstaculo()
+            ):
+                self.mapa.grilla[self.pos_x][self.pos_y] = 0
                 self.pos_x += 1
+                self.mapa.grilla[self.pos_x][self.pos_y] = 3
         elif direccion == "a":
-            if self.mapa.es_valido(self.pos_x, self.pos_y):
-                self.pos_y_anterior = self.pos_y
-                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = 0
+            if (
+                self.mapa.es_valido(self.pos_x, self.pos_y)
+                and not self._validar_obstaculo()
+            ):
+                self.mapa.grilla[self.pos_x][self.pos_y] = 0
                 self.pos_y -= 1
+                self.mapa.grilla[self.pos_x][self.pos_y] = 3
         elif direccion == "d":
-            if self.mapa.es_valido(self.pos_x, self.pos_y):
-                self.pos_y_anterior = self.pos_y
-                self.mapa.grilla[self.pos_x_anterior][self.pos_y_anterior] = 0
+            if (
+                self.mapa.es_valido(self.pos_x, self.pos_y)
+                and not self._validar_obstaculo()
+            ):
+                self.mapa.grilla[self.pos_x][self.pos_y] = 0
                 self.pos_y += 1
+                self.mapa.grilla[self.pos_x][self.pos_y] = 3
 
     def agregar_al_mapa(self):
         if self.mapa.es_valido(self.pos_x, self.pos_y):
             self.mapa.grilla[self.pos_x][self.pos_y] = 3
+
+    def _validar_obstaculo(self):
+        return self.mapa.grilla[self.pos_y][self.pos_x] == 1
 
 
 class Villanos(Entidad):
@@ -59,7 +75,11 @@ class Villanos(Entidad):
 
     def es_valido(self, pos):
         x, y = pos
-        return (0 <= y < len(self.mapa.matriz)) and (0 <= x < len(self.mapa.matriz[0])) and self.mapa.matriz[y][x] != 1
+        return (
+            (0 <= y < len(self.mapa.matriz))
+            and (0 <= x < len(self.mapa.matriz[0]))
+            and self.mapa.matriz[y][x] != 1
+        )
 
     def movimiento_AI(self, player_pos, max_turno):
         mejor_mov = self.get_best_move(player_pos, max_turno)
@@ -105,13 +125,16 @@ class Villanos(Entidad):
         if es_max:
             max_eval = float("-inf")
             for move in self.movimientos_validos(villano_pos):
-                eval = self.minimax(profundidad + 1, False, move, player_pos, turno, max_turno)
+                eval = self.minimax(
+                    profundidad + 1, False, move, player_pos, turno, max_turno
+                )
                 max_eval = max(max_eval, eval)
             return max_eval
         else:
             min_eval = float("inf")
             for move in self.movimientos_validos(player_pos):
-                eval = self.minimax(profundidad + 1, True, villano_pos, move, turno + 1, max_turno)
+                eval = self.minimax(
+                    profundidad + 1, True, villano_pos, move, turno + 1, max_turno
+                )
                 min_eval = min(min_eval, eval)
             return min_eval
-
