@@ -18,6 +18,7 @@ class Jugar():
 
             direccion = input('Ingrese una direccion (w,a,s,d)')
             self.heroe.movimiento(direccion)
+            self.heroe.agregar_al_mapa()
             
             turno += 1
 
