@@ -10,3 +10,7 @@ class Mapa():
     def es_valido(self):
         x,y=self.pos
         return 0<=x<self.alto and 0<=y<self.ancho
+
+    def mostrar_tablero(self):
+        for fila in self.grilla:
+            print(" ".join(fila))
