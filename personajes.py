@@ -59,12 +59,14 @@ class Villanos(Entidad):
 
     def es_valido(self, pos):
         x, y = pos
-        return (0 <= y < len(self.mapa.matriz)) and (0 <= x < len(self.mapa.matriz[0])) and self.mapa.matriz[y][x] != 1
+        return (0 <= y < len(self.mapa.grilla)) and (0 <= x < len(self.mapa.grilla[0])) and self.mapa.grilla[y][x] != 1
 
     def movimiento_AI(self, player_pos, max_turno):
         mejor_mov = self.get_best_move(player_pos, max_turno)
         if mejor_mov:
+            self.mapa.grilla[self.pos_x][self.pos_y] = 0
             self.pos_x, self.pos_y = mejor_mov
+            self.mapa.grilla[self.pos_x][self.pos_y] = 9
             self.ultimos_movimientos.append(mejor_mov)
             if len(self.ultimos_movimientos) > 4:
                 self.ultimos_movimientos.pop(0)
