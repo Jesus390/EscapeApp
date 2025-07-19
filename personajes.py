@@ -1,11 +1,11 @@
 from entidad import Entidad
 
 
-class Personajes(Entidad):
+class Heroe(Entidad):
     def __init__(self, mapa):
         self.mapa = mapa
 
-    def mover(self, direccion):
+    def movimiento(self, direccion):
         if direccion == "w":
             self.y -= 1
         elif direccion == "s":
@@ -14,3 +14,11 @@ class Personajes(Entidad):
             self.x -= 1
         elif direccion == "d":
             self.x += 1
+
+
+class Villanos(Entidad):
+    def __init__(self, mapa):
+        self.mapa = mapa
+
+    def movimiento(self, direccion):
+        direccion = [()]
