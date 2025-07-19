@@ -13,13 +13,17 @@ class Heroe(Entidad):
 
     def movimiento(self, direccion):
         if direccion == "w":
-            self.y -= 1
+            if self.mapa.es_valido(self.pos_x, self.pos_y - 1):
+                self.y -= 1
         elif direccion == "s":
-            self.y += 1
+            if self.mapa.es_valido(self.pos_x, self.pos_y + 1):
+                self.y += 1
         elif direccion == "a":
-            self.x -= 1
+            if self.mapa.es_valido(self.pos_x, self.pos_y - 1):
+                self.x -= 1
         elif direccion == "d":
-            self.x += 1
+            if self.mapa.es_valido(self.pos_x, self.pos_y + 1):
+                self.x += 1
 
 
 class Villanos(Entidad):
