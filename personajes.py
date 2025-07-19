@@ -4,6 +4,12 @@ from entidad import Entidad
 class Heroe(Entidad):
     def __init__(self, mapa):
         self.mapa = mapa
+        self.poderes = {
+            "speed": False,
+            "salto": False,
+            "teleport": False,
+            "escudo": False,
+        }
 
     def movimiento(self, direccion):
         if direccion == "w":
@@ -19,6 +25,12 @@ class Heroe(Entidad):
 class Villanos(Entidad):
     def __init__(self, mapa):
         self.mapa = mapa
+        self.poderes = {
+            "speed": False,
+            "salto": False,
+            "teleport": False,
+            "escudo": False,
+        }
 
     def movimiento(self):
         movimientos = [(1, 0), (-1, 0), (0, 1), (0, -1)]
