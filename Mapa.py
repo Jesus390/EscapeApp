@@ -16,8 +16,7 @@ class Mapa():
             2: 'X'
         }
 
-    def es_valido(self):
-        x, y = self.pos
+    def es_valido(self, x, y):
         return 0 <= x < self.alto and 0 <= y < self.ancho
 
     def mostrar_tablero(self):
