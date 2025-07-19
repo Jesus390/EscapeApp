@@ -7,7 +7,9 @@ class Jugar():
     def __init__(self, alto, ancho, pos_inicial):
         self.tablero = Mapa(alto, ancho, pos_inicial)
         self.heroe = Heroe(self.tablero, pos_inicial)
-        self.villano = Villanos(self.tablero, (27, 47))
+
+        ubi_malo = self.tablero.buscar_ubicacion_libre()
+        self.villano = Villanos(self.tablero, ubi_malo)
 
     def jugar(self):
         turno = 0
@@ -23,7 +25,7 @@ class Jugar():
 
             direccion = input('Ingrese una direccion (w,a,s,d)')
             self.heroe.movimiento(direccion)
-            self.heroe.agregar_al_mapa()
+            self.villano.movimiento_AI((self.heroe.pos_x, self.heroe.pos_y), turno)
             
             turno += 1
 
