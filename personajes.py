@@ -21,4 +21,4 @@ class Villanos(Entidad):
         self.mapa = mapa
 
     def movimiento(self, direccion):
-        direccion = [()]
+        movimientos = [(1, 0), (-1, 0), (0, 1), (0, -1)]
