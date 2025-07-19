@@ -10,6 +10,7 @@ class Jugar():
 
     def jugar(self):
         turno = 0
+        self.tablero.generar_cuadras()
         while turno <= 10:
             self.tablero.mostrar_tablero()
 
@@ -19,5 +20,5 @@ class Jugar():
             turno += 1
 
 pos_inicial = (0,0)
-jugar = Jugar(10,10, pos_inicial)
+jugar = Jugar(40,40, pos_inicial)
 jugar.jugar()
