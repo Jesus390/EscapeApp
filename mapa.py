@@ -11,17 +11,24 @@ class Mapa:
         self.generar_tablero()
 
     def generar_tablero(self):
-        for fila in range(0, self.dimension, 2):
-            for columna in range(0, self.dimension, 2):
-                self.tablero[fila][columna] = self.edificio
+        for fila in range(0, self.ancho, 2):
+            for columna in range(0, self.alto, 2):
+                self.matriz[fila][columna] = self.edificio
 
-        for fila in range(self.dimension):
-            for columna in range(self.dimension):
-                if self.tablero[fila][columna] == 0:
+        for fila in range(self.ancho):
+            for columna in range(self.alto):
+                if self.matriz[fila][columna] == 0:
                     if random.randint(0, 100) <= self.porcentaje:
-                        self.tablero[fila][columna] = self.obstaculos
+                        self.matriz[fila][columna] = self.bloqueos
 
-    def mostrar(self):
-        for filas in self.matriz:
-            print(" ".join(filas))
+    def validacion_entrada_salidar(self, entrada, salida):
+        if 0 <= entrada[0] < self.ancho and 0 <= entrada[1] < self.alto:
+            if self.matriz[entrada[0]][entrada[1]] != self.edificio and self.matriz[entrada[0]][entrada[1]] != self.bloqueos:
+                self.matriz[entrada[0]][entrada[1]] = 4
+
+        if 0 <= salida[0] < self.ancho and 0 <= salida[1] < self.alto:
+            if self.matriz[salida[0]][salida[1]] != self.edificio and self.matriz[salida[0]][salida[1]] != self.bloqueos:
+                if salida != entrada:
+                    self.matriz[salida[0]][salida[1]] = 5
+
 
