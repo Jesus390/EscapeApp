@@ -8,9 +8,15 @@ class Mapa():
         self.grilla = [[0 for _ in range(ancho)] for _ in range(alto)]
 
     def es_valido(self):
+        """
+        Validacion de posicion dentro del tablero
+        """
         x,y=self.pos
         return 0<=x<self.alto and 0<=y<self.ancho
 
     def mostrar_tablero(self):
+        """
+        Metodo que identa el tablero
+        """
         for fila in self.grilla:
             print(" ".join(fila))
