@@ -16,8 +16,6 @@ class Heroe(Entidad):
         if direccion == "w":
             if self.mapa.es_valido(self.pos_x, self.pos_y - 1):
                 self.pos_y -= 1
-            else:
-                print('mov no valido')
         elif direccion == "s":
             if self.mapa.es_valido(self.pos_x, self.pos_y + 1):
                 self.pos_y += 1
