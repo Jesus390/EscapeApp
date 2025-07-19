@@ -1,5 +1,5 @@
 from personajes import Heroe
-from Mapa import Mapa
+from mapa import Mapa
 from premiotrampa import Premio
 
 class Jugar():
