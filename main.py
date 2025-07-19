@@ -6,7 +6,7 @@ class Jugar():
 
     def __init__(self, alto, ancho, pos_inicial):
         self.tablero = Mapa(alto, ancho, pos_inicial)
-        self.personaje = Heroe(self.tablero)
+        self.heroe = Heroe(pos_inicial, self.tablero)
 
     def jugar(self):
         turno = 0
@@ -15,10 +15,10 @@ class Jugar():
             self.tablero.mostrar_tablero()
 
             direccion = input('Ingrese una direccion (w,a,s,d)')
-            self.personaje.movimiento(direccion)
+            self.heroe.movimiento(direccion)
             
             turno += 1
 
 pos_inicial = (0,0)
-jugar = Jugar(40,40, pos_inicial)
+jugar = Jugar(30,50, pos_inicial)
 jugar.jugar()
